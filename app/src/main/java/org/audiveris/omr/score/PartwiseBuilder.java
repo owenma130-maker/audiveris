@@ -634,7 +634,7 @@ public class PartwiseBuilder
         if (transposition != null && transposition != 0) {
             Transpose transpose = new Transpose();
             transpose.setChromatic(new BigDecimal(transposition));
-            pmScorePart.getTranspose().add(transpose);
+            pmScorePart.setTranspose(transpose);
         }
 
         // LogicalPart in scorePartwise
