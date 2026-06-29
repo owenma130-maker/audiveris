@@ -633,7 +633,7 @@ public class PartwiseBuilder
         Integer transposition = logicalPart.getTransposition();
         if (transposition != null && transposition != 0) {
             Transpose transpose = factory.createTranspose();
-            transpose.setChromatic(new BigDecimal(transposition));
+            transpose.setChromatic(new BigInteger("" + transposition));
             pmScorePart.getTranspose().add(transpose);
         }
 
