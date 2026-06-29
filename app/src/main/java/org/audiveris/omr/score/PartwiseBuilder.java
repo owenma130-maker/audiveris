@@ -629,14 +629,6 @@ public class PartwiseBuilder
 
         }
 
-        // Transpose element for transposing instruments
-        Integer transposition = logicalPart.getTransposition();
-        if (transposition != null && transposition != 0) {
-            Transpose transpose = new Transpose();
-            transpose.setChromatic(new BigDecimal(transposition));
-            pmScorePart.setTranspose(transpose);
-        }
-
         // LogicalPart in scorePartwise
         ScorePartwise.Part pmPart = factory.createScorePartwisePart();
         scorePartwise.getPart().add(pmPart);
@@ -2044,6 +2036,16 @@ public class PartwiseBuilder
                 if (isScoreFirstMeasure && current.logicalPart.isMultiStaff()) {
                     getAttributes().setStaves(
                             new BigInteger("" + current.logicalPart.getStaffCount()));
+                }
+
+                // Transposing instrument?
+                if (isScoreFirstMeasure) {
+                    Integer transposition = current.logicalPart.getTransposition();
+                    if (transposition != null && transposition != 0) {
+                        Transpose transpose = new Transpose();
+                        transpose.setChromatic(new BigDecimal(transposition));
+                        getAttributes().setTranspose(transpose);
+                    }
                 }
 
                 // Insert KeySignature(s), if any (they may vary between staves)
