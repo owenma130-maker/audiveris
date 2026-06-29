@@ -632,8 +632,8 @@ public class PartwiseBuilder
         // Transpose element for transposing instruments
         Integer transposition = logicalPart.getTransposition();
         if (transposition != null && transposition != 0) {
-            Transpose transpose = factory.createTranspose();
-            transpose.setChromatic(new BigInteger("" + transposition));
+            Transpose transpose = new Transpose();
+            transpose.setChromatic(new BigDecimal(transposition));
             pmScorePart.getTranspose().add(transpose);
         }
 
