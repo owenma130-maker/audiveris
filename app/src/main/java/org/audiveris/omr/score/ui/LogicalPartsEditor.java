@@ -67,6 +67,7 @@ import java.util.EnumMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.swing.DefaultCellEditor;
@@ -705,6 +706,7 @@ public class LogicalPartsEditor
         Staves(25),
         Name(80),
         Abbrev(30),
+        Transpose(60),
         Midi(170);
 
         public final int width; // Minimum column width
@@ -887,6 +889,10 @@ public class LogicalPartsEditor
                 case Staves -> StaffConfig.toCsvString(logical.getStaffConfigs());
                 case Name -> logical.getName();
                 case Abbrev -> logical.getAbbreviation();
+                case Transpose -> {
+                    Integer tp = logical.getTransposition();
+                    yield (tp != null) ? tp.toString() : "";
+                }
                 case Midi -> getProgramList(logical);
             };
         }
@@ -951,6 +957,25 @@ public class LogicalPartsEditor
                         logger.debug("newMidi: {}", newMidi);
                         logical.setMidiProgram(newProgram);
                         setModified(true);
+                    }
+                }
+                case Transpose -> {
+                    final String str = ((String) value).trim();
+                    if (str.isEmpty()) {
+                        if (logical.getTransposition() != null) {
+                            logical.setTransposition(null);
+                            setModified(true);
+                        }
+                    } else {
+                        try {
+                            int tp = Integer.parseInt(str);
+                            if (!Objects.equals(tp, logical.getTransposition())) {
+                                logical.setTransposition(tp);
+                                setModified(true);
+                            }
+                        } catch (NumberFormatException ex) {
+                            logger.warn("Illegal transposition value: '{}'", str);
+                        }
                     }
                 }
                 case Staves -> {

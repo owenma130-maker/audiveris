@@ -132,6 +132,16 @@ public class LogicalPart
     @XmlAttribute(name = "midi-program")
     private Integer midiProgram;
 
+    /**
+     * Instrument transposition in semitones (MusicXML chromatic value).
+     * <p>
+     * Positive = written pitch is lower than sounding (instrument sounds above written).
+     * Negative = written pitch is higher than sounding (instrument sounds below written).
+     * Zero = non-transposing instrument. Null = unspecified.
+     */
+    @XmlAttribute(name = "transposition")
+    private Integer transposition;
+
     //~ Constructors -------------------------------------------------------------------------------
 
     /** Meant for XML binder only */
@@ -183,6 +193,7 @@ public class LogicalPart
         try {
             final LogicalPart that = (LogicalPart) super.clone();
             that.staffConfigs = new ArrayList<>(staffConfigs);
+            that.transposition = this.transposition;
 
             return that;
         } catch (CloneNotSupportedException ignored) {
@@ -209,7 +220,8 @@ public class LogicalPart
             return Objects.deepEquals(name, that.name) //
                     && Objects.deepEquals(abbreviation, that.abbreviation) //
                     && Objects.deepEquals(staffConfigs, that.staffConfigs) //
-                    && Objects.deepEquals(midiProgram, that.midiProgram);
+                    && Objects.deepEquals(midiProgram, that.midiProgram)
+                    && Objects.deepEquals(transposition, that.transposition);
         }
 
         return false;
@@ -385,6 +397,7 @@ public class LogicalPart
         hash = (23 * hash) + Objects.hashCode(this.name);
         hash = (23 * hash) + Objects.hashCode(this.abbreviation);
         hash = (23 * hash) + Objects.hashCode(this.midiProgram);
+        hash = (23 * hash) + Objects.hashCode(this.transposition);
 
         return hash;
     }
@@ -437,6 +450,32 @@ public class LogicalPart
     public void setMidiProgram (Integer midiProgram)
     {
         this.midiProgram = midiProgram;
+    }
+
+    //-------------------//
+    // getTransposition //
+    //-------------------//
+    /**
+     * Report the instrument transposition in semitones.
+     *
+     * @return transposition (null if unspecified)
+     */
+    public Integer getTransposition ()
+    {
+        return transposition;
+    }
+
+    //-------------------//
+    // setTransposition //
+    //-------------------//
+    /**
+     * Set the instrument transposition.
+     *
+     * @param transposition chromatic transposition in semitones
+     */
+    public void setTransposition (Integer transposition)
+    {
+        this.transposition = transposition;
     }
 
     //---------//
@@ -503,6 +542,10 @@ public class LogicalPart
 
         if (midiProgram != null) {
             sb.append(" midi:").append(midiProgram);
+        }
+
+        if (transposition != null) {
+            sb.append(" trans:").append(transposition);
         }
 
         sb.append(" configs:[").append(StaffConfig.toCsvString(staffConfigs)).append(']');

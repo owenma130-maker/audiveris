@@ -737,8 +737,8 @@ public class TextWord
                 "Regular expression to detect words with embedded dashes");
 
         private final Constant.String partNameRegexp = new Constant.String(
-                ".*[\\w]+.*$",
-                "Regular expression to validate a part name");
+                ".*[\\p{L}]+.*$",
+                "Regular expression to validate a part name (Unicode-aware)");
 
         private final Scale.Fraction standardFontSize = new Scale.Fraction(
                 2.5,

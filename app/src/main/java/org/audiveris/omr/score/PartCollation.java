@@ -24,6 +24,7 @@ package org.audiveris.omr.score;
 import org.audiveris.omr.constant.Constant;
 import org.audiveris.omr.constant.ConstantSet;
 import org.audiveris.omr.sheet.SheetStub;
+import org.audiveris.omr.score.InstrumentTransposition;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -141,6 +142,13 @@ public class PartCollation
         logical.setName(partRef.getName());
         logical.setAbbreviation(null);
         logical.setStaffConfigs(partRef.getStaffConfigs());
+        // Suggest transposition based on instrument name
+        if (partRef.getName() != null && logical.getTransposition() == null) {
+            InstrumentTransposition info = InstrumentTransposition.lookup(partRef.getName());
+            if (info != null) {
+                logical.setTransposition(info.chromatic);
+            }
+        }
         logger.debug("Created {} from {}", logical, partRef);
 
         final Record record = new Record(logical);

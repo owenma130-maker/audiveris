@@ -218,6 +218,7 @@ import org.audiveris.proxymusic.TiedType;
 import org.audiveris.proxymusic.Time;
 import org.audiveris.proxymusic.TimeModification;
 import org.audiveris.proxymusic.TimeSymbol;
+import org.audiveris.proxymusic.Transpose;
 import org.audiveris.proxymusic.Tuplet;
 import org.audiveris.proxymusic.TypedText;
 import org.audiveris.proxymusic.Unpitched;
@@ -626,6 +627,14 @@ public class PartwiseBuilder
             midiInstrument.setMidiProgram(midiProgram);
             midiInstrument.setVolume(new BigDecimal(score.getVolume()));
 
+        }
+
+        // Transpose element for transposing instruments
+        Integer transposition = logicalPart.getTransposition();
+        if (transposition != null && transposition != 0) {
+            Transpose transpose = factory.createTranspose();
+            transpose.setChromatic(new BigDecimal(transposition));
+            pmScorePart.getTranspose().add(transpose);
         }
 
         // LogicalPart in scorePartwise
