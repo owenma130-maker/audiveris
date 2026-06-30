@@ -2055,9 +2055,8 @@ public class PartwiseBuilder
                 if (measure.getTimeSignature() != null) {
                     processTime(measure.getTimeSignature());
                 } else if (isScoreFirstMeasure) {
-                    // We need to insert a time sig!
-                    // TODO
-                    ///processTime(4,4,null);
+                    // Default time signature to 4/4
+                    processTime(4, 4, null);
                 }
             }
 

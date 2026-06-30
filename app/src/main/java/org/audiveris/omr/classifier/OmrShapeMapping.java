@@ -120,13 +120,13 @@ public abstract class OmrShapeMapping
         map.put(Shape.CAESURA, OmrShape.caesura);
         map.put(Shape.G_CLEF, OmrShape.gClef);
         //        map.put(Shape.G_CLEF_SMALL, OmrShape.gClef);
-        //        map.put(Shape.G_CLEF_8VA, OmrShape.gClef8va);
-        //        map.put(Shape.G_CLEF_8VB, OmrShape.gClef8vb);
+        map.put(Shape.G_CLEF_8VA, OmrShape.gClef8va);
+        map.put(Shape.G_CLEF_8VB, OmrShape.gClef8vb);
         ///map.put(Shape.C_CLEF, OmrShape.cClef);
         map.put(Shape.F_CLEF, OmrShape.fClef);
         //        map.put(Shape.F_CLEF_SMALL, OmrShape.fClefChange);
-        //        map.put(Shape.F_CLEF_8VA, OmrShape.fClef8va);
-        //        map.put(Shape.F_CLEF_8VB, OmrShape.fClef8vb);
+        map.put(Shape.F_CLEF_8VA, OmrShape.fClef8va);
+        map.put(Shape.F_CLEF_8VB, OmrShape.fClef8vb);
         map.put(Shape.PERCUSSION_CLEF, OmrShape.unpitchedPercussionClef1);
         map.put(Shape.FLAT, OmrShape.accidentalFlat); // If not in key
         map.put(Shape.NATURAL, OmrShape.accidentalNatural); // If not in key
