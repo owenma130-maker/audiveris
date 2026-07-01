@@ -228,7 +228,7 @@ public class ProcessingSwitches
 
         final Constant.Boolean crossHeads = new Constant.Boolean(false, "Cross note heads");
 
-        final Constant.Boolean tremolos = new Constant.Boolean(false, "Tremolos");
+        final Constant.Boolean tremolos = new Constant.Boolean(true, "Tremolos");
 
         final Constant.Boolean fingerings = new Constant.Boolean(false, "Fingering digits");
 

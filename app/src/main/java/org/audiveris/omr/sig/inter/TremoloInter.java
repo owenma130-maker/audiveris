@@ -457,7 +457,11 @@ public class TremoloInter
 
             if (link.relation instanceof TremoloStemRelation) {
                 final StemInter stem = (StemInter) link.partner;
-                chord = stem.getChords().get(0);
+                final List<HeadChordInter> stemChords = stem.getChords();
+                if (stemChords.isEmpty()) {
+                    continue;
+                }
+                chord = stemChords.get(0);
             } else if (link.relation instanceof TremoloWholeRelation) {
                 final HeadInter head = (HeadInter) link.partner;
                 chord = head.getChord();
