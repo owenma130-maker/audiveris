@@ -815,9 +815,9 @@ public class PeakGraph
             final StaffProjector projector = new StaffProjector(sheet, staff, this);
             projector.process();
 
-            if (staff.isOneLineStaff() && projector.getPeaks().size() <= 1) {
+            if (staff.isOneLineStaff() && (projector.getPeaks().size() == 0)) {
                 logger.info(
-                        "Discarding 1-line staff for unsufficient barline peaks {} {}",
+                        "Discarding 1-line staff with no barline peak {} {}",
                         staff,
                         staff.getMidLine().getBounds());
                 staffManager.removeStaff(staff);

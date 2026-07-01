@@ -649,11 +649,15 @@ public class AnnotationsBuilder
         private OmrShape getOmrShape (ClefInter inter)
         {
             return switch (inter.getShape()) {
-                case G_CLEF, G_CLEF_SMALL, G_CLEF_8VA, G_CLEF_8VB -> OmrShape.gClef;
+                case G_CLEF, G_CLEF_SMALL -> OmrShape.gClef;
+                case G_CLEF_8VA -> OmrShape.gClef8va;
+                case G_CLEF_8VB -> OmrShape.gClef8vb;
                 case C_CLEF -> inter.getIntegerPitch() == 0 //
                         ? OmrShape.cClefAlto
                         : OmrShape.cClefTenor;
-                case F_CLEF, F_CLEF_SMALL, F_CLEF_8VA, F_CLEF_8VB -> OmrShape.fClef;
+                case F_CLEF, F_CLEF_SMALL -> OmrShape.fClef;
+                case F_CLEF_8VA -> OmrShape.fClef8va;
+                case F_CLEF_8VB -> OmrShape.fClef8vb;
                 case PERCUSSION_CLEF -> OmrShape.unpitchedPercussionClef1;
                 default -> null;
             };
